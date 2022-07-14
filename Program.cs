@@ -1,46 +1,93 @@
-﻿//Task 25: Напишите цикл, который принимает на вход два числа (A и B) и
-// /// возводит число A в натуральную степень B.
-// Console.WriteLine("Input A= ");
-// int a=Convert.ToInt32(Console.ReadLine());
-// Console.WriteLine("Input B= ");
-// int b=Convert.ToInt32(Console.ReadLine());
-// int mathAB=1;
-// for (int i = 0; i < b; i++)
-// {
-//     mathAB=mathAB*a;    
-// }
-// Console.WriteLine($"{a}^{b} - > {mathAB}");
+﻿// homework seminar 5 c#
+// Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая 
+// покажет количество чётных чисел в массиве.
+// 345, 897, 568, 234] -> 2
 
-// // Task 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
-// Console.WriteLine("Input Number= ");
-// int number=Convert.ToInt32(Console.ReadLine());
-// int i=1;
-// int j=0;
-//     while (number>i) // цикл определения размера числа
-//     {
-//         i=i*10;
-//         j++;
-//     }
+Console.WriteLine();
+int [] CreatRandomArray (int size, int min, int max)
+{
+    int [] array=new int [size];
+    for (int i = 0; i < size; i++)
+    {
+        array[i]=new Random().Next(min,max);
+    }
+    return array;
+}
+void ShowArray (int [] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i]+" ");
 
-// int digitNum = 0; // цифра в числе
-// int ind = 1; // индекс для движения по числу
-// int sumDigit=0; // сумма цифр числа
-// for (i = 0; i < j; i++)
-// {
-//     digitNum=number/ind%10;
-//     ind=ind*10;
-//     sumDigit =sumDigit +digitNum;
-// }
-//  Console.WriteLine($"the sum of the digits  = {sumDigit}");
+    }
+    Console.Write("]");
+}
+int [] myArray34=CreatRandomArray(4,100,1000);
 
-// task 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
-// int range=new Random().Next(1,8); // определяет размер массива от 1...8
-// int [] array= new int [range]; 
-// for (int i = 0; i < range; i++)
-// {
-//     array[i]=new Random().Next(1,100);
-// }
-// for (int i = 0; i < range; i++)
-// {
-//     Console.Write(array[i]+" ");
-// }
+int quantityNumbers=0;
+for (int i = 0 ; i < myArray34.Length ; i++)
+{
+    if (myArray34[i]%2==0) quantityNumbers=quantityNumbers+1;
+}
+Console.WriteLine ("Задача 34 Задайте массив заполненный случайными положительными трёхзначными числами."); 
+Console.WriteLine("Напишите программу, которая покажет количество чётных чисел в массиве");
+ShowArray(myArray34);
+Console.Write(" -> " + quantityNumbers);
+Console.WriteLine();
+
+// Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
+// [3, 7, 23, 12] -> 19
+// [-4, -6, 89, 6] -> 0
+
+int [] myArray36=CreatRandomArray(4,-100,100);
+int sumOdd=0;
+for (int i = 0; i < myArray36.Length; i++)
+{
+    if (i%2==1) sumOdd=myArray36[i]+sumOdd;
+}
+Console.WriteLine();
+Console.WriteLine("Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.");
+ShowArray(myArray36);
+Console.Write(" - > "+ sumOdd);
+Console.WriteLine();
+Console.WriteLine();
+
+// Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
+// [3 7 22 2 78] -> 76
+Console.WriteLine("Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.");
+Console.WriteLine("[3 7 22 2 78] -> 76");
+
+double [] CreatRandomArrayDouble (int size, int range)
+{
+    double [] array=new double [size];
+    for (int i = 0; i < size; i++)
+    {
+        array[i]=new Random().NextDouble()*range;
+    }
+    return array;
+}
+void ShowArrayDouble (double [] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] +" ");
+    }
+    Console.Write("]");
+    
+}
+double [] myArray38=CreatRandomArrayDouble (4,10);
+
+ShowArrayDouble (myArray38);
+int minArray=0;
+int maxArray=myArray38.Length-1;   
+    for (int i = 0; i < myArray38.Length; i++)
+    {       
+        if (myArray38[minArray]>myArray38[i]) minArray=i;
+        if (myArray38[maxArray]<myArray38[myArray38.Length-1-i]) maxArray=i;      
+    } 
+double sumMinMaxArray=myArray38[minArray]+myArray38[maxArray];
+Console.Write(" - > "+sumMinMaxArray);
+Console.WriteLine();
+Console.WriteLine();
