@@ -1,93 +1,63 @@
-﻿// homework seminar 5 c#
-// Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая 
-// покажет количество чётных чисел в массиве.
-// 345, 897, 568, 234] -> 2
-
-Console.WriteLine();
-int [] CreatRandomArray (int size, int min, int max)
+﻿// home work seminar 6 c# 16/07/22
+// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+Console.Clear();
+Console.WriteLine("Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.");
+int ind=0; // индекс для цикла по вводу размера массива 
+int ind2=0; // индекс для подсчета чисел в массиве, больших >0
+int m=0;
+int mArray=0; // переменная для ввода чисел в массиве
+while(ind<1)
 {
-    int [] array=new int [size];
-    for (int i = 0; i < size; i++)
+    Console.WriteLine("Input quantity number (M): ");
+    m=Convert.ToInt32(Console.ReadLine());
+    if (m<=0) 
     {
-        array[i]=new Random().Next(min,max);
+        Console.WriteLine("Reapet input"); 
+        ind=0;
     }
-    return array;
-}
-void ShowArray (int [] array)
-{
-    Console.Write("[");
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i]+" ");
-
-    }
-    Console.Write("]");
-}
-int [] myArray34=CreatRandomArray(4,100,1000);
-
-int quantityNumbers=0;
-for (int i = 0 ; i < myArray34.Length ; i++)
-{
-    if (myArray34[i]%2==0) quantityNumbers=quantityNumbers+1;
-}
-Console.WriteLine ("Задача 34 Задайте массив заполненный случайными положительными трёхзначными числами."); 
-Console.WriteLine("Напишите программу, которая покажет количество чётных чисел в массиве");
-ShowArray(myArray34);
-Console.Write(" -> " + quantityNumbers);
-Console.WriteLine();
-
-// Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
-// [3, 7, 23, 12] -> 19
-// [-4, -6, 89, 6] -> 0
-
-int [] myArray36=CreatRandomArray(4,-100,100);
-int sumOdd=0;
-for (int i = 0; i < myArray36.Length; i++)
-{
-    if (i%2==1) sumOdd=myArray36[i]+sumOdd;
-}
-Console.WriteLine();
-Console.WriteLine("Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.");
-ShowArray(myArray36);
-Console.Write(" - > "+ sumOdd);
-Console.WriteLine();
-Console.WriteLine();
-
-// Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
-// [3 7 22 2 78] -> 76
-Console.WriteLine("Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.");
-Console.WriteLine("[3 7 22 2 78] -> 76");
-
-double [] CreatRandomArrayDouble (int size, int range)
-{
-    double [] array=new double [size];
-    for (int i = 0; i < size; i++)
-    {
-        array[i]=new Random().NextDouble()*range;
-    }
-    return array;
-}
-void ShowArrayDouble (double [] array)
-{
-    Console.Write("[");
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i] +" ");
-    }
-    Console.Write("]");
+    else ind=1;
     
 }
-double [] myArray38=CreatRandomArrayDouble (4,10);
+int [] numberArray = new int [m];
 
-ShowArrayDouble (myArray38);
-int minArray=0;
-int maxArray=myArray38.Length-1;   
-    for (int i = 0; i < myArray38.Length; i++)
-    {       
-        if (myArray38[minArray]>myArray38[i]) minArray=i;
-        if (myArray38[maxArray]<myArray38[myArray38.Length-1-i]) maxArray=i;      
-    } 
-double sumMinMaxArray=myArray38[minArray]+myArray38[maxArray];
-Console.Write(" - > "+sumMinMaxArray);
-Console.WriteLine();
-Console.WriteLine();
+for (int i = 0; i < m; i++)
+{
+   Console.WriteLine($"Input {i+1} number");
+   mArray=Convert.ToInt32(Console.ReadLine());
+   numberArray[i]=mArray;
+   if (mArray<0) ind2=ind2+1;
+}
+Console.WriteLine(); 
+Console.Write("[");
+for (int i = 0; i < m; i++)
+{
+    
+    Console.Write(" "+ numberArray[i]+" ");    
+}
+Console.Write("] - > "+ ind2);
+Console.WriteLine ();
+
+// Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
+// значения b1, k1, b2 и k2 задаются пользователем.
+// b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; 5,5)
+
+Console.WriteLine ("Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2;");
+Console.WriteLine ("значения b1, k1, b2 и k2 задаются пользователем.");
+Console.WriteLine("input b1:");
+double b1=Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("input k1:");
+double k1=Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("input b2:");
+double b2=Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("input k2:");
+double k2=Convert.ToDouble(Console.ReadLine());
+double xIntersection=0;
+double yIntersection=0;
+if (b1==b2 & k1==k2) Console.WriteLine("Прямые совпадают");
+else if (k1==k2) Console.WriteLine("Прямые параллельны друг другу");
+else 
+{
+    xIntersection =(b2-b1)/(k1-k2);
+    yIntersection =k1*xIntersection+b1;
+    Console.WriteLine("точка пересечения "+" ("+ xIntersection+" ;"+yIntersection+ ")");
+}
