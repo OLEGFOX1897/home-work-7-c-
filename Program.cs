@@ -1,63 +1,93 @@
-﻿// home work seminar 6 c# 16/07/22
-// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
-Console.Clear();
-Console.WriteLine("Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.");
-int ind=0; // индекс для цикла по вводу размера массива 
-int ind2=0; // индекс для подсчета чисел в массиве, больших >0
-int m=0;
-int mArray=0; // переменная для ввода чисел в массиве
-while(ind<1)
+﻿// homework 7 c# 16/07/2022
+// Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+// Console.WriteLine();
+Console.WriteLine(" Задача 47. Задайте двумерный массив размером m x n, заполненный случайными вещественными числами.");
+Console.WriteLine("input m");
+int m=Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("input n");
+int n=Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("input range random numbers (0...) ");
+int range=Convert.ToInt32(Console.ReadLine());
+double [,] GetRandomArray(int m, int n, int range) // создает двумерный массив
 {
-    Console.WriteLine("Input quantity number (M): ");
-    m=Convert.ToInt32(Console.ReadLine());
-    if (m<=0) 
+    double[,] array = new double[m, n];
+    for (int i = 0; i < m; i++)
     {
-        Console.WriteLine("Reapet input"); 
-        ind=0;
+        for (int j = 0; j < n; j++)
+        {
+            int sign= new Random().Next(-1,2); // задает +\- случайным образом
+            if (sign==0) sign=1; 
+            array[i,j]=new Random().NextDouble()*range*sign;
+        }
     }
-    else ind=1;
-    
+    return array;
 }
-int [] numberArray = new int [m];
+void PrintArray(double[,] inArray) // вывводит двумерный массив
+{
+    for (int row = 0; row < inArray.GetLength(0); row++)
+    {
+        for (int column = 0; column < inArray.GetLength(1); column++)
+        {
+            Console.Write($"{inArray[row,column]:f1}  ");
+        }
+        Console.WriteLine();
+    }
+}
+double [,] randomArray= GetRandomArray(m,n,range);
+PrintArray(randomArray);
+Console.WriteLine();
 
+// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает 
+// значение этого элемента или же указание, что такого элемента нет.
+
+Console.WriteLine("Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает ");
+Console.WriteLine("значение этого элемента или же указание, что такого элемента нет.");
+Console.WriteLine();
+Console.WriteLine("Input number row array (the array was creates in the task 47)");
+int row=Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Input number column array (the array was creates in the task 47)");
+int column=Convert.ToInt32(Console.ReadLine());
+if (row>m | column>n | row<0 | column<0) Console.WriteLine("The array have not input element");
+else if (row==m | column==n) Console.WriteLine($"Meaning array - > {randomArray[row-1,column-1]:f1}");
+else  Console.WriteLine($"Meaning array - > {randomArray[row,column]:f1}");
+Console.WriteLine();
+
+// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце. (размер берется из задачи 47)
+Console.WriteLine("Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.");
+Console.WriteLine("Размер массива взят из задачи 47");
+int [,] GetRandomArrayInt (int m, int n) // создает двумерный массив
+{
+    int [,] array = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            array[i,j]=new Random().Next(0,11);
+        }
+    }
+    return array;
+}
+double [] arrayArithmeticMean = new double [n];
+double sum=0;
+int [,] arrayNew=GetRandomArrayInt(m,n);
+Console.WriteLine();
 for (int i = 0; i < m; i++)
 {
-   Console.WriteLine($"Input {i+1} number");
-   mArray=Convert.ToInt32(Console.ReadLine());
-   numberArray[i]=mArray;
-   if (mArray<0) ind2=ind2+1;
+    for (int j = 0; j < n; j++)
+    {
+        Console.Write(arrayNew[i,j]+"  ");
+    }    
+    Console.WriteLine();
 }
-Console.WriteLine(); 
-Console.Write("[");
-for (int i = 0; i < m; i++)
-{
-    
-    Console.Write(" "+ numberArray[i]+" ");    
-}
-Console.Write("] - > "+ ind2);
-Console.WriteLine ();
 
-// Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
-// значения b1, k1, b2 и k2 задаются пользователем.
-// b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; 5,5)
-
-Console.WriteLine ("Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2;");
-Console.WriteLine ("значения b1, k1, b2 и k2 задаются пользователем.");
-Console.WriteLine("input b1:");
-double b1=Convert.ToDouble(Console.ReadLine());
-Console.WriteLine("input k1:");
-double k1=Convert.ToDouble(Console.ReadLine());
-Console.WriteLine("input b2:");
-double b2=Convert.ToDouble(Console.ReadLine());
-Console.WriteLine("input k2:");
-double k2=Convert.ToDouble(Console.ReadLine());
-double xIntersection=0;
-double yIntersection=0;
-if (b1==b2 & k1==k2) Console.WriteLine("Прямые совпадают");
-else if (k1==k2) Console.WriteLine("Прямые параллельны друг другу");
-else 
+Console.WriteLine();
+for (int i = 0; i < n; i++)
 {
-    xIntersection =(b2-b1)/(k1-k2);
-    yIntersection =k1*xIntersection+b1;
-    Console.WriteLine("точка пересечения "+" ("+ xIntersection+" ;"+yIntersection+ ")");
+   for (int j = 0; j < m; j++)
+   {
+        sum=sum + arrayNew[j,i];
+   } 
+   arrayArithmeticMean[i]=sum/m;
+   sum=0;
+    Console.Write($"{arrayArithmeticMean[i]:f1}  ");
 }
